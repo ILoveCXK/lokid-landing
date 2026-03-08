@@ -97,6 +97,7 @@
       color: rgba(74,222,128,0.5); letter-spacing: 2px; text-transform: uppercase;
     }
 
+    /* === HERO === */
     .hero {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -110,12 +111,10 @@
       background: radial-gradient(ellipse, rgba(74,222,128,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .hero-content {
       position: relative; z-index: 1;
       max-width: 800px; text-align: center;
     }
-
     .hud-status {
       font-family: 'JetBrains Mono', monospace; font-size: 11px;
       letter-spacing: 3px; color: var(--green); text-transform: uppercase;
@@ -127,7 +126,7 @@
     .hero h1 {
       font-family: 'Poppins', sans-serif; font-weight: 900;
       font-size: clamp(36px, 6vw, 68px);
-      line-height: 1.05; color: var(--white);
+      line-height: 1.1; color: var(--white);
       margin-bottom: 18px; letter-spacing: -1px;
     }
     .hero h1 .green {
@@ -135,8 +134,6 @@
     }
     .hero h1 .line2 {
       display: block;
-      font-size: clamp(46px, 8vw, 90px);
-      margin-top: 4px;
     }
 
     .hero-sub {
@@ -148,7 +145,6 @@
       position: relative; z-index: 1;
       max-width: 520px; width: 100%; margin: 0 auto;
     }
-
     .form-note {
       text-align: center; font-size: 12px; color: rgba(255,255,255,0.25);
       margin-top: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px;
@@ -160,9 +156,87 @@
       background: linear-gradient(90deg, transparent 0%, rgba(74,222,128,0.15) 50%, transparent 100%);
     }
 
+    /* === PRODUCT SHOWCASE === */
+    .product-showcase {
+      position: relative; z-index: 1;
+      padding: 60px 24px 50px;
+      max-width: 900px; margin: 0 auto;
+      text-align: center;
+    }
+    .product-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: var(--green); opacity: 0.5; margin-bottom: 24px;
+    }
+    .product-frame {
+      position: relative;
+      width: 100%; max-width: 700px; margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(74,222,128,0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(74,222,128,0.02);
+    }
+    .product-frame::before,
+    .product-frame::after {
+      content: ''; position: absolute;
+      width: 40px; height: 40px;
+      border-color: rgba(74,222,128,0.3); border-style: solid;
+    }
+    .product-frame::before {
+      top: 12px; left: 12px;
+      border-width: 2px 0 0 2px; border-radius: 4px 0 0 0;
+    }
+    .product-frame::after {
+      bottom: 12px; right: 12px;
+      border-width: 0 2px 2px 0; border-radius: 0 0 4px 0;
+    }
+    .product-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .product-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+    }
+    .product-placeholder svg {
+      width: 80px; height: 80px;
+      color: rgba(74,222,128,0.15);
+    }
+    .product-placeholder span {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: rgba(74,222,128,0.25); letter-spacing: 2px; text-transform: uppercase;
+    }
+    .product-corner-tl, .product-corner-br {
+      position: absolute; width: 40px; height: 40px;
+    }
+    .product-corner-tl {
+      top: 12px; right: 12px;
+      border-top: 2px solid rgba(74,222,128,0.3);
+      border-right: 2px solid rgba(74,222,128,0.3);
+      border-radius: 0 4px 0 0;
+    }
+    .product-corner-br {
+      bottom: 12px; left: 12px;
+      border-bottom: 2px solid rgba(74,222,128,0.3);
+      border-left: 2px solid rgba(74,222,128,0.3);
+      border-radius: 0 0 0 4px;
+    }
+    /* HUD data overlays on product frame */
+    .hud-overlay {
+      position: absolute; font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; color: rgba(74,222,128,0.3); letter-spacing: 1px;
+    }
+    .hud-overlay.top-left { top: 20px; left: 20px; }
+    .hud-overlay.top-right { top: 20px; right: 20px; }
+    .hud-overlay.bottom-left { bottom: 20px; left: 20px; }
+    .hud-overlay.bottom-right { bottom: 20px; right: 20px; }
+
+    /* === FEATURES === */
     .features {
       position: relative; z-index: 1;
-      padding: 60px 24px 60px; max-width: 1100px; margin: 0 auto;
+      padding: 50px 24px 60px; max-width: 1100px; margin: 0 auto;
     }
     .features-header { text-align: center; margin-bottom: 40px; }
     .features-header .section-label {
@@ -195,7 +269,6 @@
       transform: translateY(-4px);
       box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 30px rgba(74,222,128,0.1);
     }
-
     .feature-icon {
       width: 48px; height: 48px;
       border-radius: 10px; display: flex; align-items: center; justify-content: center;
@@ -203,23 +276,11 @@
       background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3);
     }
     .feature-icon svg { width: 24px; height: 24px; }
-
     .feature-card h3 {
       font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16px;
       color: var(--white); margin-bottom: 8px;
     }
     .feature-card p { font-size: 13px; line-height: 1.65; color: var(--gray); }
-
-    .cta-section {
-      position: relative; z-index: 1;
-      padding: 60px 24px 80px; text-align: center;
-    }
-    .cta-section h2 {
-      font-family: 'Poppins', sans-serif; font-weight: 900;
-      font-size: clamp(22px, 3.5vw, 36px); margin-bottom: 6px; color: var(--white);
-    }
-    .cta-sub { font-size: 15px; color: var(--gray); margin-bottom: 28px; }
-    .cta-sub .green { color: var(--green); font-weight: 600; }
 
     footer {
       position: relative; z-index: 1;
@@ -233,10 +294,10 @@
       nav { padding: 14px 20px; }
       .nav-tag { display: none; }
       .hero { padding: 80px 20px 30px; }
-      .hero h1 .line2 { font-size: clamp(38px, 11vw, 60px); }
       .features-grid { grid-template-columns: 1fr; gap: 12px; }
       .feature-card { padding: 24px 18px; }
       .poker-deco { display: none; }
+      .product-frame { aspect-ratio: 4 / 3; }
     }
 
     .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -263,6 +324,7 @@
     <span class="nav-tag">// AR Coaching Glasses</span>
   </nav>
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
       <div class="hud-status">
@@ -278,8 +340,39 @@
     </div>
   </section>
 
+  <!-- PRODUCT SHOWCASE -->
+  <section class="product-showcase fade-in">
+    <p class="product-label">// Product Preview</p>
+    <div class="product-frame">
+      <!-- Replace this placeholder with: <img src="hero.jpg" alt="Lokid AR Glasses"> -->
+      <div class="product-placeholder">
+        <svg viewBox="0 0 120 50" fill="none" stroke="currentColor" stroke-width="1.5">
+          <!-- Glasses outline SVG -->
+          <rect x="5" y="10" width="45" height="30" rx="8" />
+          <rect x="70" y="10" width="45" height="30" rx="8" />
+          <path d="M50 25 C55 20 65 20 70 25" />
+          <line x1="5" y1="25" x2="0" y2="20" />
+          <line x1="115" y1="25" x2="120" y2="20" />
+          <!-- HUD elements on left lens -->
+          <rect x="12" y="16" width="16" height="3" rx="1" fill="currentColor" opacity="0.3" />
+          <rect x="12" y="21" width="10" height="2" rx="1" fill="currentColor" opacity="0.2" />
+          <circle cx="35" cy="28" r="4" stroke-dasharray="2 1" opacity="0.3" />
+        </svg>
+        <span>[ Add product image: hero.jpg ]</span>
+      </div>
+      <div class="product-corner-tl"></div>
+      <div class="product-corner-br"></div>
+      <!-- HUD data overlays -->
+      <span class="hud-overlay top-left">REC &#9679;</span>
+      <span class="hud-overlay top-right">LOKID v1.0</span>
+      <span class="hud-overlay bottom-left">16:9 • AR DISPLAY</span>
+      <span class="hud-overlay bottom-right">2026.Q3</span>
+    </div>
+  </section>
+
   <div class="divider"></div>
 
+  <!-- FEATURES -->
   <section class="features">
     <div class="features-header">
       <p class="section-label fade-in">// Capabilities</p>
@@ -310,16 +403,6 @@
     </div>
   </section>
 
-  <div class="divider"></div>
-
-  <section class="cta-section">
-    <h2 class="fade-in">Ready to level up?</h2>
-    <p class="cta-sub fade-in">Early supporters get <span class="green">40% off</span> at launch.</p>
-    <div class="form-section fade-in">
-      <script async data-uid="faa6e4ec7b" src="https://lokid-2.kit.com/faa6e4ec7b/index.js"></script>
-    </div>
-  </section>
-
   <footer>
     &copy; 2026 Lokid &ensp;|&ensp; AR Coaching Systems
   </footer>
@@ -345,7 +428,7 @@
       container.appendChild(p);
     }
 
-    // Kit form style override - runs after Kit loads
+    // Kit form style override
     function styleKitForms() {
       document.querySelectorAll('.formkit-fields').forEach(function(fields) {
         fields.style.cssText = 'display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;gap:0 !important';
@@ -363,18 +446,13 @@
         el.style.display = 'none';
       });
     }
-
-    // Watch for Kit forms to load, then restyle
-    var kitObserver = new MutationObserver(function(mutations) {
-      if (document.querySelector('.formkit-fields')) {
-        styleKitForms();
-      }
+    var kitObserver = new MutationObserver(function() {
+      if (document.querySelector('.formkit-fields')) styleKitForms();
     });
     kitObserver.observe(document.body, { childList: true, subtree: true });
-    // Also run on a delay as backup
     setTimeout(styleKitForms, 1500);
     setTimeout(styleKitForms, 3000);
-    // Responsive: on mobile, stack the form
+
     function checkMobile() {
       if (window.innerWidth <= 768) {
         document.querySelectorAll('.formkit-fields').forEach(function(f) {
