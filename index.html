@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lokid AR Glasses — The Smartest Player at Any Table</title>
+  <title>Lokid AR Glasses â The Smartest Player at Any Table</title>
   <meta name="description" content="AR glasses that coach you during poker. Real-time move suggestions, blunder alerts, and automatic post-game reviews. Join the waitlist for 40% early-bird pricing.">
-  <meta property="og:title" content="Lokid AR Glasses — The Smartest Player at Any Table">
+  <meta property="og:title" content="Lokid AR Glasses â The Smartest Player at Any Table">
   <meta property="og:description" content="AR glasses that coach you during poker. Real-time move suggestions, blunder alerts, and post-game reviews.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,40 +37,44 @@
     .form-note { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(74,222,128,0.5); letter-spacing: 2px; position: relative; z-index: 2; }
     .form-note strong { color: var(--green); }
     /* Card hand animation next to "any table" */
-    .card-hand-wrapper { display: inline-block; position: relative; vertical-align: middle; width: 120px; height: 80px; margin-left: 12px; }
-    .card-hand { position: absolute; bottom: 0; left: 0; width: 120px; height: 80px; }
-    .card-hand .card {
-      position: absolute; width: 44px; height: 62px; border-radius: 6px;
-      background: rgba(0,0,0,0.7); border: 1.5px solid rgba(74,222,128,0.35);
-      display: flex; align-items: flex-start; justify-content: flex-start;
-      padding: 5px 6px; font-family: 'JetBrains Mono', monospace;
-      font-size: 13px; font-weight: 700; color: var(--green);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
-      transform-origin: bottom center;
-      animation: dealCard 0.6s ease-out forwards;
-      opacity: 0;
+    /* Poker Hand Cycling Animation */
+    .poker-hand-wrapper { display: inline-block; position: relative; vertical-align: middle; width: 100px; height: 60px; margin-left: 14px; }
+    .poker-hand { position: absolute; bottom: 0; left: 0; width: 100px; height: 60px; }
+    .poker-hand .hcard {
+      position: absolute; width: 38px; height: 54px; border-radius: 5px;
+      background: rgba(10,10,10,0.85); border: 1.5px solid rgba(74,222,128,0.4);
+      display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start;
+      padding: 4px 5px; font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; font-weight: 700; color: var(--green);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.6);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      opacity: 0; transform: translateY(10px);
     }
-    .card-hand .card:nth-child(1) { left: 0; transform: rotate(-18deg); animation-delay: 0.3s; z-index: 1; }
-    .card-hand .card:nth-child(2) { left: 16px; transform: rotate(-9deg); animation-delay: 0.6s; z-index: 2; }
-    .card-hand .card:nth-child(3) { left: 32px; transform: rotate(0deg); animation-delay: 0.9s; z-index: 3; }
-    .card-hand .card:nth-child(4) { left: 48px; transform: rotate(9deg); animation-delay: 1.2s; z-index: 4; }
-    .card-hand .card:nth-child(5) { left: 64px; transform: rotate(18deg); animation-delay: 1.5s; z-index: 5; }
-    @keyframes dealCard {
-      0% { opacity: 0; transform: translateY(-30px) rotate(0deg) scale(0.5); }
-      60% { opacity: 1; }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
+    .poker-hand .hcard.show { opacity: 1; transform: translateY(0); }
+    .poker-hand .hcard:nth-child(1) { left: 0; transform: rotate(-8deg) translateY(10px); }
+    .poker-hand .hcard:nth-child(2) { left: 28px; transform: rotate(8deg) translateY(10px); }
+    .poker-hand .hcard.show:nth-child(1) { transform: rotate(-8deg) translateY(0); }
+    .poker-hand .hcard.show:nth-child(2) { transform: rotate(8deg) translateY(0); }
+    .poker-hand .hcard .rank { line-height: 1; }
+    .poker-hand .hcard .suit-icon { font-size: 16px; opacity: 0.7; margin-top: 2px; }
+    .poker-hand .hcard.red { color: #ef4444; border-color: rgba(239,68,68,0.3); }
+    .poker-odds {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 800;
+      color: var(--green); text-shadow: 0 0 20px rgba(74,222,128,0.5);
+      opacity: 0; transition: opacity 0.4s ease; white-space: nowrap;
+      letter-spacing: -0.5px;
     }
-    .card-hand .card:nth-child(1) { animation-name: dealCard1; }
-    .card-hand .card:nth-child(2) { animation-name: dealCard2; }
-    .card-hand .card:nth-child(3) { animation-name: dealCard3; }
-    .card-hand .card:nth-child(4) { animation-name: dealCard4; }
-    .card-hand .card:nth-child(5) { animation-name: dealCard5; }
-    @keyframes dealCard1 { 0% { opacity:0; transform: translateY(-30px) rotate(0deg) scale(0.5); } 100% { opacity:1; transform: rotate(-18deg) scale(1); } }
-    @keyframes dealCard2 { 0% { opacity:0; transform: translateY(-30px) rotate(0deg) scale(0.5); } 100% { opacity:1; transform: rotate(-9deg) scale(1); } }
-    @keyframes dealCard3 { 0% { opacity:0; transform: translateY(-30px) rotate(0deg) scale(0.5); } 100% { opacity:1; transform: rotate(0deg) scale(1); } }
-    @keyframes dealCard4 { 0% { opacity:0; transform: translateY(-30px) rotate(0deg) scale(0.5); } 100% { opacity:1; transform: rotate(9deg) scale(1); } }
-    @keyframes dealCard5 { 0% { opacity:0; transform: translateY(-30px) rotate(0deg) scale(0.5); } 100% { opacity:1; transform: rotate(18deg) scale(1); } }
-    .card .suit { position: absolute; bottom: 5px; right: 6px; font-size: 11px; opacity: 0.6; }
+    .poker-odds.show { opacity: 1; }
+    .poker-odds.low { color: #ef4444; text-shadow: 0 0 20px rgba(239,68,68,0.4); }
+    @media (max-width: 600px) {
+      .poker-hand-wrapper { width: 80px; height: 48px; margin-left: 8px; }
+      .poker-hand { width: 80px; height: 48px; }
+      .poker-hand .hcard { width: 30px; height: 42px; font-size: 11px; padding: 3px 4px; }
+      .poker-hand .hcard:nth-child(2) { left: 22px; }
+      .poker-hand .hcard .suit-icon { font-size: 13px; }
+      .poker-odds { font-size: 16px; }
+    }
     /* Product Showcase */
     .product-showcase { padding: 40px 20px 80px; text-align: center; position: relative; z-index: 1; }
     .product-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 4px; color: var(--green); margin-bottom: 24px; text-transform: uppercase; }
@@ -103,14 +107,6 @@
       .nav { padding: 16px 20px; }
       .hero { padding: 100px 16px 40px; }
       .features { padding: 40px 16px; }
-      .card-hand-wrapper { width: 80px; height: 55px; margin-left: 8px; }
-      .card-hand { width: 80px; height: 55px; }
-      .card-hand .card { width: 30px; height: 42px; font-size: 10px; padding: 3px 4px; }
-      .card-hand .card:nth-child(1) { left: 0; }
-      .card-hand .card:nth-child(2) { left: 11px; }
-      .card-hand .card:nth-child(3) { left: 22px; }
-      .card-hand .card:nth-child(4) { left: 33px; }
-      .card-hand .card:nth-child(5) { left: 44px; }
       .card .suit { font-size: 8px; }
     }
   </style>
@@ -135,7 +131,7 @@
     <div class="animated-grid"></div>
     <div class="particles" id="particles"></div>
     <div class="hud-status">Coming Soon</div>
-    <h1 class="hero-title">The smartest player at<br><span class="line2">any table</span><span class="card-hand-wrapper"><span class="card-hand"><span class="card">A<span class="suit">♠</span></span><span class="card">K<span class="suit">♥</span></span><span class="card">Q<span class="suit">♦</span></span><span class="card">J<span class="suit">♣</span></span><span class="card">10<span class="suit">♥</span></span></span></span></h1>
+    <h1 class="hero-title">The smartest player at<br><span class="line2">any table</span><span class="poker-hand-wrapper"><span class="poker-hand"><span class="hcard" id="card1"><span class="rank">A</span><span class="suit-icon">\u2660</span></span><span class="hcard" id="card2"><span class="rank">A</span><span class="suit-icon">\u2665</span></span></span><span class="poker-odds" id="pokerOdds">85%</span></span></h1>
     <p class="hero-sub">AR glasses that coach you during poker: real-time move suggestions, blunder alerts, and automatic post-game reviews.</p>
     <div class="hero-form">
       <script async data-uid="faa6e4ec7b" src="https://lokid-2.kit.com/faa6e4ec7b/index.js"></script>
@@ -151,7 +147,7 @@
       <div class="product-corner-br"></div>
       <span class="hud-overlay top-left">REC &#9679;</span>
       <span class="hud-overlay top-right">LOKID v1.0</span>
-      <span class="hud-overlay bottom-left">16:9 • AR DISPLAY</span>
+      <span class="hud-overlay bottom-left">16:9 â¢ AR DISPLAY</span>
       <span class="hud-overlay bottom-right">2026.Q3</span>
     </div>
   </section>
@@ -254,6 +250,55 @@
           b.style.width = '100%';
         });
       }, 2000);
-    }  </script>
+    }  
+
+    // Poker hand cycling animation with accurate preflop odds
+    (function() {
+      var hands = [
+        { c1: {rank:"A", suit:"\u2660", red:false}, c2: {rank:"A", suit:"\u2665", red:true}, odds: "85%", low: false },
+        { c1: {rank:"7", suit:"\u2663", red:false}, c2: {rank:"2", suit:"\u2666", red:true}, odds: "35%", low: true },
+        { c1: {rank:"K", suit:"\u2660", red:false}, c2: {rank:"Q", suit:"\u2660", red:false}, odds: "66%", low: false },
+        { c1: {rank:"J", suit:"\u2666", red:true}, c2: {rank:"T", suit:"\u2666", red:true}, odds: "63%", low: false }
+      ];
+      var current = 0;
+      var card1 = document.getElementById("card1");
+      var card2 = document.getElementById("card2");
+      var oddsEl = document.getElementById("pokerOdds");
+      if (!card1 || !card2 || !oddsEl) return;
+
+      function setCards(hand) {
+        card1.querySelector(".rank").textContent = hand.c1.rank;
+        card1.querySelector(".suit-icon").textContent = hand.c1.suit;
+        card1.className = "hcard" + (hand.c1.red ? " red" : "");
+        card2.querySelector(".rank").textContent = hand.c2.rank;
+        card2.querySelector(".suit-icon").textContent = hand.c2.suit;
+        card2.className = "hcard" + (hand.c2.red ? " red" : "");
+        oddsEl.textContent = hand.odds;
+        oddsEl.className = "poker-odds" + (hand.low ? " low" : "");
+      }
+
+      function cycle() {
+        var hand = hands[current];
+        setCards(hand);
+        card1.classList.add("show");
+        setTimeout(function() { card2.classList.add("show"); }, 150);
+        setTimeout(function() {
+          card1.classList.remove("show");
+          card2.classList.remove("show");
+          setTimeout(function() { oddsEl.classList.add("show"); }, 300);
+        }, 1800);
+        setTimeout(function() {
+          oddsEl.classList.remove("show");
+          setTimeout(function() {
+            current = (current + 1) % hands.length;
+            cycle();
+          }, 400);
+        }, 3200);
+      }
+
+      setTimeout(cycle, 800);
+    })();
+</script>
 </body>
 </html>
+
