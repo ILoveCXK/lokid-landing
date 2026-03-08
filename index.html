@@ -21,7 +21,6 @@
       --black: #000000;
       --dark: #050505;
       --gray: #8a8a8a;
-      --light-gray: #b0b0b0;
       --white: #f0f0f0;
     }
 
@@ -35,16 +34,15 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* === ANIMATED GRID === */
     .grid-bg {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
       background:
         linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px);
       background-size: 80px 80px;
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
       animation: gridDrift 40s linear infinite;
     }
     @keyframes gridDrift {
@@ -53,223 +51,238 @@
     }
 
     .scanline {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 2px;
       background: linear-gradient(90deg, transparent 0%, var(--green) 50%, transparent 100%);
-      opacity: 0.15;
-      z-index: 999;
-      pointer-events: none;
+      opacity: 0.15; z-index: 999; pointer-events: none;
       animation: scanDown 8s linear infinite;
     }
-    @keyframes scanDown {
-      0% { top: -2px; }
-      100% { top: 100vh; }
-    }
+    @keyframes scanDown { 0% { top: -2px; } 100% { top: 100vh; } }
 
-    .particles {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
+    .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
     .particle {
-      position: absolute;
-      width: 2px; height: 2px;
-      background: var(--green);
-      border-radius: 50%;
-      opacity: 0;
+      position: absolute; width: 2px; height: 2px;
+      background: var(--green); border-radius: 50%; opacity: 0;
       animation: floatUp linear infinite;
     }
     @keyframes floatUp {
       0% { opacity: 0; transform: translateY(100vh) scale(0); }
-      10% { opacity: 0.6; }
-      90% { opacity: 0.6; }
+      10% { opacity: 0.6; } 90% { opacity: 0.6; }
       100% { opacity: 0; transform: translateY(-20vh) scale(1); }
     }
 
+    /* === FLOATING POKER ELEMENTS === */
+    .poker-deco {
+      position: fixed; pointer-events: none; z-index: 0;
+      opacity: 0.04; color: var(--green);
+    }
+    .poker-deco svg { width: 100%; height: 100%; }
+    .poker-deco.suit-1 { top: 12%; left: 5%; width: 80px; height: 80px; animation: floatSlow 20s ease-in-out infinite; }
+    .poker-deco.suit-2 { top: 35%; right: 4%; width: 60px; height: 60px; animation: floatSlow 25s ease-in-out infinite reverse; }
+    .poker-deco.suit-3 { bottom: 25%; left: 8%; width: 50px; height: 50px; animation: floatSlow 18s ease-in-out infinite; }
+    .poker-deco.suit-4 { bottom: 10%; right: 10%; width: 70px; height: 70px; animation: floatSlow 22s ease-in-out infinite reverse; }
+    .poker-deco.chip-1 { top: 55%; left: 3%; width: 90px; height: 90px; animation: floatSlow 24s ease-in-out infinite; opacity: 0.03; }
+    .poker-deco.chip-2 { top: 18%; right: 8%; width: 70px; height: 70px; animation: floatSlow 28s ease-in-out infinite reverse; opacity: 0.03; }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(8deg); }
+    }
+
+    /* === NAV === */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 20px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(20px);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(74,222,128,0.08);
     }
-
     .nav-brand {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 900;
-      font-size: 22px;
-      color: var(--green);
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      text-decoration: none;
+      font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 20px;
+      color: var(--green); letter-spacing: 4px; text-transform: uppercase; text-decoration: none;
     }
-
     .nav-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: rgba(74,222,128,0.5);
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: rgba(74,222,128,0.5); letter-spacing: 2px; text-transform: uppercase;
     }
 
+    /* === HERO === */
     .hero {
-      position: relative;
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 100px 24px 60px;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 140px 24px 100px;
-      z-index: 1;
     }
-
     .hero::before {
-      content: '';
-      position: absolute;
-      top: 25%;
-      left: 50%;
+      content: ''; position: absolute; top: 20%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 900px; height: 700px;
+      width: 900px; height: 600px;
       background: radial-gradient(ellipse, rgba(74,222,128,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-      text-align: center;
+      position: relative; z-index: 1;
+      max-width: 900px; text-align: center;
     }
 
     .hud-status {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 3px;
-      color: var(--green);
-      text-transform: uppercase;
-      margin-bottom: 28px;
-      opacity: 0.7;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      letter-spacing: 3px; color: var(--green); text-transform: uppercase;
+      margin-bottom: 20px; opacity: 0.7;
     }
     .hud-status .blink { animation: blink 1.5s step-end infinite; }
     @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 
     .hero h1 {
-      font-family: 'Poppins', sans-serif;
-      font-weight: 900;
-      font-size: clamp(44px, 7.5vw, 88px);
-      line-height: 1.0;
-      color: var(--white);
-      margin-bottom: 32px;
-      letter-spacing: -1px;
+      font-family: 'Poppins', sans-serif; font-weight: 900;
+      font-size: clamp(40px, 7vw, 80px);
+      line-height: 1.0; color: var(--white);
+      margin-bottom: 20px; letter-spacing: -1px;
     }
-    .hero h1 .green { color: var(--green); text-shadow: 0 0 40px rgba(74,222,128,0.3); }
+    .hero h1 .green {
+      color: var(--green); text-shadow: 0 0 40px rgba(74,222,128,0.3);
+    }
+    .hero h1 .line2 {
+      display: block;
+      font-size: clamp(52px, 9vw, 110px);
+    }
 
     .hero-sub {
-      font-size: clamp(16px, 2vw, 19px);
-      line-height: 1.7;
-      color: var(--gray);
-      max-width: 580px;
-      margin: 0 auto 52px;
+      font-size: clamp(15px, 1.8vw, 18px); line-height: 1.7;
+      color: var(--gray); max-width: 540px; margin: 0 auto 28px;
     }
 
-    .hero-image {
-      position: relative; z-index: 1; width: 100%; max-width: 940px;
-      margin: 0 auto 60px; border-radius: 12px; overflow: hidden;
-      border: 1px solid rgba(74,222,128,0.15);
-      box-shadow: 0 0 100px rgba(74,222,128,0.06), 0 30px 80px rgba(0,0,0,0.6);
+    /* === FORM === */
+    .form-section {
+      position: relative; z-index: 1;
+      max-width: 500px; width: 100%; margin: 0 auto;
     }
-    .hero-image::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent 0%, var(--green) 50%, transparent 100%); opacity: 0.5;
-    }
-    .hero-image img { width: 100%; display: block; }
 
-    .hero-image-placeholder {
-      width: 100%; max-width: 940px; margin: 0 auto 60px; aspect-ratio: 16/9;
-      border-radius: 12px; border: 1px solid rgba(74,222,128,0.12);
-      background: linear-gradient(160deg, #020a04 0%, #050505 50%, #020a04 100%);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 16px; position: relative; overflow: hidden;
-      box-shadow: 0 0 100px rgba(74,222,128,0.06), 0 30px 80px rgba(0,0,0,0.6); z-index: 1;
-    }
-    .hero-image-placeholder::before {
-      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 60%; height: 50%; border: 1px solid rgba(74,222,128,0.08); border-radius: 120px;
-    }
-    .hero-image-placeholder .hud-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(74,222,128,0.4); letter-spacing: 3px; text-transform: uppercase; }
-    .hero-image-placeholder .corner { position: absolute; width: 24px; height: 24px; border-color: rgba(74,222,128,0.2); border-style: solid; }
-    .hero-image-placeholder .corner.tl { top: 16px; left: 16px; border-width: 2px 0 0 2px; }
-    .hero-image-placeholder .corner.tr { top: 16px; right: 16px; border-width: 2px 2px 0 0; }
-    .hero-image-placeholder .corner.bl { bottom: 16px; left: 16px; border-width: 0 0 2px 2px; }
-    .hero-image-placeholder .corner.br { bottom: 16px; right: 16px; border-width: 0 2px 2px 0; }
-
-    .form-section { position: relative; z-index: 1; max-width: 540px; width: 100%; margin: 0 auto; }
     .formkit-form { background: transparent !important; border: none !important; padding: 0 !important; min-width: 0 !important; }
     .formkit-form [data-style="clean"] { padding: 0 !important; }
     .formkit-fields { display: flex !important; gap: 0 !important; }
     .formkit-field { flex: 1 !important; }
-    .formkit-input { padding: 18px 20px !important; font-size: 15px !important; font-family: 'Inter', sans-serif !important; background: rgba(255,255,255,0.04) !important; border: 1px solid rgba(74,222,128,0.2) !important; border-right: none !important; border-radius: 6px 0 0 6px !important; color: #f0f0f0 !important; height: auto !important; width: 100% !important; }
+    .formkit-input {
+      padding: 16px 18px !important; font-size: 15px !important;
+      font-family: 'Inter', sans-serif !important;
+      background: rgba(255,255,255,0.04) !important;
+      border: 1px solid rgba(74,222,128,0.25) !important;
+      border-right: none !important;
+      border-radius: 6px 0 0 6px !important;
+      color: #f0f0f0 !important; height: auto !important; width: 100% !important;
+    }
     .formkit-input::placeholder { color: rgba(255,255,255,0.3) !important; }
     .formkit-input:focus { border-color: var(--green) !important; background: rgba(74,222,128,0.04) !important; outline: none !important; box-shadow: 0 0 20px rgba(74,222,128,0.1) !important; }
-    .formkit-submit { padding: 18px 28px !important; font-size: 13px !important; font-family: 'JetBrains Mono', monospace !important; font-weight: 500 !important; text-transform: uppercase !important; letter-spacing: 2px !important; background: var(--green) !important; color: var(--black) !important; border: 1px solid var(--green) !important; border-radius: 0 6px 6px 0 !important; cursor: pointer !important; white-space: nowrap !important; transition: all 0.3s !important; }
+    .formkit-submit {
+      padding: 16px 24px !important; font-size: 13px !important;
+      font-family: 'JetBrains Mono', monospace !important; font-weight: 500 !important;
+      text-transform: uppercase !important; letter-spacing: 2px !important;
+      background: var(--green) !important; color: var(--black) !important;
+      border: 1px solid var(--green) !important;
+      border-radius: 0 6px 6px 0 !important;
+      cursor: pointer !important; white-space: nowrap !important; transition: all 0.3s !important;
+    }
     .formkit-submit:hover { background: #5eea94 !important; box-shadow: 0 0 40px rgba(74,222,128,0.3) !important; }
     .formkit-guarantee, .formkit-powered-by-convertkit-container { display: none !important; }
     .formkit-alert-success { display: block !important; color: var(--green) !important; font-family: 'Poppins', sans-serif !important; font-size: 18px !important; text-align: center !important; padding: 20px !important; }
-    .form-note { text-align: center; font-size: 13px; color: rgba(255,255,255,0.25); margin-top: 18px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px; }
+
+    .form-note {
+      text-align: center; font-size: 12px; color: rgba(255,255,255,0.2);
+      margin-top: 14px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px;
+    }
     .form-note strong { color: var(--green); font-weight: 500; }
-    .divider { width: 100%; max-width: 1100px; margin: 0 auto; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(74,222,128,0.15) 50%, transparent 100%); }
 
-    .features { position: relative; z-index: 1; padding: 120px 24px; max-width: 1100px; margin: 0 auto; }
-    .features-header { text-align: center; margin-bottom: 72px; }
-    .features-header .section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--green); opacity: 0.6; margin-bottom: 16px; }
-    .section-title { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(28px, 4vw, 42px); color: var(--white); }
-    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .feature-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(74,222,128,0.08); border-radius: 12px; padding: 40px 28px; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden; }
-    .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(74,222,128,0.3), transparent); opacity: 0; transition: opacity 0.5s; }
-    .feature-card:hover { border-color: rgba(74,222,128,0.2); background: rgba(74,222,128,0.02); transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(74,222,128,0.05); }
-    .feature-card:hover::before { opacity: 1; }
-    .feature-icon { width: 48px; height: 48px; border: 1px solid rgba(74,222,128,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 20px; background: rgba(74,222,128,0.05); }
-    .feature-card h3 { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 18px; color: var(--white); margin-bottom: 12px; }
-    .feature-card p { font-size: 14px; line-height: 1.7; color: var(--gray); }
-
-    .how-it-works { position: relative; z-index: 1; padding: 100px 24px 120px; max-width: 700px; margin: 0 auto; }
-    .how-it-works .features-header { text-align: center; margin-bottom: 64px; }
-    .steps { display: flex; flex-direction: column; gap: 48px; }
-    .step { display: flex; gap: 28px; align-items: flex-start; position: relative; }
-    .step-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--green); border: 1px solid rgba(74,222,128,0.2); border-radius: 8px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: rgba(74,222,128,0.05); }
-    .step-body h3 { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 18px; color: var(--white); margin-bottom: 8px; }
-    .step-body p { font-size: 14px; line-height: 1.7; color: var(--gray); }
-    .step:not(:last-child)::after { content: ''; position: absolute; left: 19px; top: 48px; width: 1px; height: calc(100% + 8px); background: linear-gradient(180deg, rgba(74,222,128,0.2), transparent); }
-
-    .cta-section { position: relative; z-index: 1; padding: 100px 24px 140px; text-align: center; }
-    .cta-section h2 { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: clamp(28px, 5vw, 48px); margin-bottom: 16px; color: var(--white); }
-    .cta-sub { font-size: 17px; color: var(--gray); margin-bottom: 44px; }
-    .cta-sub .green { color: var(--green); font-weight: 600; }
-
-    footer { position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,0.04); padding: 36px 24px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
-
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-tag { display: none; }
-      .features-grid { grid-template-columns: 1fr; gap: 16px; }
-      .hero { padding: 120px 20px 60px; }
-      .formkit-fields { flex-direction: column !important; }
-      .formkit-input { border-right: 1px solid rgba(74,222,128,0.2) !important; border-radius: 6px !important; border-bottom: none !important; }
-      .formkit-submit { border-radius: 6px !important; width: 100% !important; }
-      .step { gap: 16px; }
-      .step:not(:last-child)::after { display: none; }
-      .feature-card { padding: 28px 24px; }
+    .divider {
+      width: 100%; max-width: 1100px; margin: 0 auto; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(74,222,128,0.15) 50%, transparent 100%);
     }
 
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    /* === FEATURES === */
+    .features {
+      position: relative; z-index: 1;
+      padding: 80px 24px 100px; max-width: 1100px; margin: 0 auto;
+    }
+    .features-header { text-align: center; margin-bottom: 56px; }
+    .features-header .section-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: var(--green); opacity: 0.6; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif; font-weight: 800;
+      font-size: clamp(26px, 4vw, 38px); color: var(--white);
+    }
+
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .feature-card {
+      background: rgba(74,222,128,0.06);
+      border: 1px solid rgba(74,222,128,0.15);
+      border-radius: 14px; padding: 36px 24px;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+      opacity: 0.4;
+    }
+    .feature-card:hover {
+      background: rgba(74,222,128,0.1);
+      border-color: rgba(74,222,128,0.3);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(74,222,128,0.08);
+    }
+
+    .feature-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      background: rgba(74,222,128,0.12); border: 1px solid rgba(74,222,128,0.25);
+    }
+    .feature-icon svg { width: 26px; height: 26px; }
+
+    .feature-card h3 {
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 17px;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .feature-card p { font-size: 14px; line-height: 1.65; color: var(--gray); }
+
+    /* === BOTTOM CTA === */
+    .cta-section {
+      position: relative; z-index: 1;
+      padding: 80px 24px 100px; text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Poppins', sans-serif; font-weight: 900;
+      font-size: clamp(24px, 4vw, 40px); margin-bottom: 8px; color: var(--white);
+    }
+    .cta-sub { font-size: 16px; color: var(--gray); margin-bottom: 32px; }
+    .cta-sub .green { color: var(--green); font-weight: 600; }
+
+    footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding: 32px 24px; text-align: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: rgba(255,255,255,0.2); letter-spacing: 1px;
+    }
+
+    /* === MOBILE === */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-tag { display: none; }
+      .hero { padding: 90px 20px 40px; }
+      .hero h1 .line2 { font-size: clamp(44px, 12vw, 70px); }
+      .features-grid { grid-template-columns: 1fr; gap: 14px; }
+      .formkit-fields { flex-direction: column !important; }
+      .formkit-input { border-right: 1px solid rgba(74,222,128,0.25) !important; border-radius: 6px !important; border-bottom: none !important; }
+      .formkit-submit { border-radius: 6px !important; width: 100% !important; }
+      .feature-card { padding: 28px 20px; }
+      .poker-deco { display: none; }
+    }
+
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
     .fade-in:nth-child(2) { transition-delay: 0.1s; }
     .fade-in:nth-child(3) { transition-delay: 0.2s; }
@@ -277,43 +290,45 @@
 </head>
 <body>
 
+  <!-- Background effects -->
   <div class="grid-bg"></div>
   <div class="scanline"></div>
   <div class="particles" id="particles"></div>
 
+  <!-- Floating poker decorations -->
+  <div class="poker-deco suit-1"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 10c-8 0-18 12-18 26 0 10 6 18 14 20-6 2-14 4-20 10-4 4-4 10 0 14s10 4 14 0c6-6 8-14 10-20 2 6 4 14 10 20 4 4 10 4 14 0s4-10 0-14c-6-6-14-8-20-10 8-2 14-10 14-20C68 22 58 10 50 10z"/></svg></div>
+  <div class="poker-deco suit-2"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 5L62 38H97L69 58l11 34L50 72 20 92l11-34L3 38h35z"/></svg></div>
+  <div class="poker-deco suit-3"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 90L10 50 50 10l40 40z"/></svg></div>
+  <div class="poker-deco suit-4"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 15C35 15 15 30 15 50c0 25 35 45 35 45s35-20 35-45C85 30 65 15 50 15z"/></svg></div>
+  <div class="poker-deco chip-1"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="34"/><line x1="50" y1="6" x2="50" y2="16"/><line x1="50" y1="84" x2="50" y2="94"/><line x1="6" y1="50" x2="16" y2="50"/><line x1="84" y1="50" x2="94" y2="50"/><line x1="19" y1="19" x2="26" y2="26"/><line x1="74" y1="74" x2="81" y2="81"/><line x1="81" y1="19" x2="74" y2="26"/><line x1="26" y1="74" x2="19" y2="81"/></svg></div>
+  <div class="poker-deco chip-2"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="34"/><line x1="50" y1="6" x2="50" y2="16"/><line x1="50" y1="84" x2="50" y2="94"/><line x1="6" y1="50" x2="16" y2="50"/><line x1="84" y1="50" x2="94" y2="50"/></svg></div>
+
+  <!-- NAV -->
   <nav>
     <a href="#" class="nav-brand">Lokid</a>
     <span class="nav-tag">// AR Coaching Glasses</span>
   </nav>
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
       <div class="hud-status">
         <span class="blink">&#9679;</span>&ensp;System Online — Pre-Launch Active
       </div>
-      <h1>The smartest player<br>at <span class="green">any table</span></h1>
+      <h1>The smartest player at<span class="line2 green">any table</span></h1>
       <p class="hero-sub">AR glasses that coach you during chess and poker — real-time move suggestions, blunder alerts, and automatic post-game reviews.</p>
-    </div>
 
-    <div class="hero-image" id="heroImg">
-      <img src="hero.jpg" alt="Lokid AR Glasses POV showing poker HUD overlay" onerror="document.getElementById('heroImg').style.display='none'; document.getElementById('heroPlaceholder').style.display='flex';">
-    </div>
-    <div class="hero-image-placeholder" id="heroPlaceholder" style="display:none;">
-      <div class="corner tl"></div>
-      <div class="corner tr"></div>
-      <div class="corner bl"></div>
-      <div class="corner br"></div>
-      <span class="hud-label">[ Awaiting Visual Feed ]</span>
-    </div>
-
-    <div class="form-section">
-      <script async data-uid="faa6e4ec7b" src="https://lokid-2.kit.com/faa6e4ec7b/index.js"></script>
-      <p class="form-note">Join waitlist for <strong>40% early-bird pricing</strong> at Kickstarter launch</p>
+      <!-- Kit Form right in hero -->
+      <div class="form-section">
+        <script async data-uid="faa6e4ec7b" src="https://lokid-2.kit.com/faa6e4ec7b/index.js"></script>
+        <p class="form-note">Join waitlist for <strong>40% early-bird pricing</strong> at Kickstarter launch</p>
+      </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
+  <!-- FEATURES -->
   <section class="features">
     <div class="features-header">
       <p class="section-label fade-in">// Capabilities</p>
@@ -321,17 +336,23 @@
     </div>
     <div class="features-grid">
       <div class="feature-card fade-in">
-        <div class="feature-icon">&#9823;</div>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M9 3v18M3 9h18M9 12l2 2 4-4"/></svg>
+        </div>
         <h3>Chess Coaching</h3>
         <p>Best move highlighted in real-time. Blunder warnings before you commit. Automatic post-game review with every session.</p>
       </div>
       <div class="feature-card fade-in">
-        <div class="feature-icon">&#9830;</div>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="14" height="20" rx="2" transform="rotate(-15 9 14)"/><rect x="8" y="2" width="14" height="20" rx="2" transform="rotate(15 15 12)"/><circle cx="12" cy="12" r="2" fill="#4ADE80"/></svg>
+        </div>
         <h3>Poker Analytics</h3>
         <p>Live win probability, pot odds, and opponent tendency tags displayed right on the lens. Better decisions every hand.</p>
       </div>
       <div class="feature-card fade-in">
-        <div class="feature-icon">&#9881;</div>
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
         <h3>Invisible Design</h3>
         <p>Looks like regular glasses. Lightweight, all-day comfortable, with a discreet micro-display only you can see.</p>
       </div>
@@ -340,38 +361,7 @@
 
   <div class="divider"></div>
 
-  <section class="how-it-works">
-    <div class="features-header">
-      <p class="section-label fade-in">// Sequence</p>
-      <h2 class="section-title fade-in">How it works</h2>
-    </div>
-    <div class="steps">
-      <div class="step fade-in">
-        <div class="step-num">01</div>
-        <div class="step-body">
-          <h3>Put on Lokid</h3>
-          <p>Lightweight AR glasses that look like everyday eyewear. No one knows you're getting coached.</p>
-        </div>
-      </div>
-      <div class="step fade-in">
-        <div class="step-num">02</div>
-        <div class="step-body">
-          <h3>Play your game</h3>
-          <p>Onboard AI recognizes the board state, cards, and opponents in real time through the built-in camera.</p>
-        </div>
-      </div>
-      <div class="step fade-in">
-        <div class="step-num">03</div>
-        <div class="step-body">
-          <h3>See the edge</h3>
-          <p>Win probabilities, optimal moves, and opponent patterns appear on your lens as a subtle green HUD.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
+  <!-- BOTTOM CTA -->
   <section class="cta-section">
     <h2 class="fade-in">Ready to level up?</h2>
     <p class="cta-sub fade-in">Early supporters get <span class="green">40% off</span> at launch.</p>
@@ -380,6 +370,7 @@
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     &copy; 2026 Lokid &ensp;|&ensp; AR Coaching Systems
   </footer>
