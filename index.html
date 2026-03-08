@@ -16,6 +16,267 @@
     :root {
       --green: #4ADE80;
       --green-dim: rgba(74, 222, 128, 0.12);
+      --dark: #000000;
+      --gray: #888;
+    }
+    body { background: var(--dark); color: #e0e0e0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(74,222,128,0.08); }
+    .logo { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 20px; color: var(--green); letter-spacing: 4px; }
+    .nav-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gray); letter-spacing: 3px; }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 20px 60px; position: relative; }
+    .animated-grid { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px); background-size: 60px 60px; animation: gridMove 20s linear infinite; }
+    @keyframes gridMove { 0% { transform: translate(0,0); } 100% { transform: translate(60px,60px); } }
+    .scanline { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--green), transparent); opacity: 0.15; animation: scanline 8s linear infinite; }
+    @keyframes scanline { 0% { top: 0; } 100% { top: 100%; } }
+    .particles { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; }
+    .particle { position: absolute; width: 2px; height: 2px; background: var(--green); border-radius: 50%; opacity: 0; animation: float 12s infinite; }
+    @keyframes float { 0%, 100% { opacity: 0; transform: translateY(0); } 50% { opacity: 0.4; transform: translateY(-100px); } }
+    .hud-status { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 6px; color: var(--green); margin-bottom: 24px; text-transform: uppercase; }
+    .hero-title { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: clamp(42px, 7vw, 80px); line-height: 1.05; color: #f0f0f0; margin-bottom: 24px; position: relative; z-index: 2; }
+    .hero-title .line2 { color: var(--green); display: block; }
+    .hero-sub { font-size: 17px; color: var(--gray); max-width: 520px; line-height: 1.7; margin-bottom: 40px; position: relative; z-index: 2; }
+    .hero-form { position: relative; z-index: 2; width: 100%; max-width: 480px; margin-bottom: 16px; }
+    .form-note { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(74,222,128,0.5); letter-spacing: 2px; position: relative; z-index: 2; }
+    .form-note strong { color: var(--green); }
+    /* Product Showcase */
+    .product-showcase { padding: 40px 20px 80px; text-align: center; position: relative; z-index: 1; }
+    .product-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 4px; color: var(--green); margin-bottom: 24px; text-transform: uppercase; }
+    .product-frame { max-width: 800px; margin: 0 auto; border: 1px solid rgba(74,222,128,0.15); border-radius: 4px; padding: 4px; position: relative; overflow: hidden; }
+    .product-image { width: 100%; height: auto; display: block; border-radius: 2px; }
+    .product-corner-tl, .product-corner-br { position: absolute; width: 20px; height: 20px; }
+    .product-corner-tl { top: -1px; left: -1px; border-top: 2px solid var(--green); border-left: 2px solid var(--green); }
+    .product-corner-br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--green); border-right: 2px solid var(--green); }
+    .hud-overlay { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(74,222,128,0.4); letter-spacing: 2px; }
+    .hud-overlay.top-left { top: 12px; left: 16px; }
+    .hud-overlay.top-right { top: 12px; right: 16px; }
+    .hud-overlay.bottom-left { bottom: 12px; left: 16px; }
+    .hud-overlay.bottom-right { bottom: 12px; right: 16px; }
+    /* Features */
+    .features { padding: 80px 20px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 4px; color: var(--green); text-align: center; margin-bottom: 12px; }
+    .section-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: clamp(28px, 4vw, 42px); text-align: center; color: #d0d0d0; margin-bottom: 48px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .feature-card { background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); border-radius: 8px; padding: 32px; transition: border-color 0.3s, background 0.3s; }
+    .feature-card:hover { border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.06); }
+    .feature-icon { width: 48px; height: 48px; border-radius: 8px; background: rgba(74,222,128,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; color: var(--green); }
+    .feature-card h3 { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 18px; color: #e0e0e0; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+    footer { text-align: center; padding: 40px 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.15); letter-spacing: 2px; border-top: 1px solid rgba(74,222,128,0.06); position: relative; z-index: 1; }
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .svg-decorations { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+    .svg-deco { position: absolute; color: rgba(74,222,128,0.06); }
+    /* Flying cards */
+    .flying-cards { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+    .flying-card { position: absolute; width: 60px; height: 84px; border-radius: 6px; border: 1px solid rgba(74,222,128,0.12); background: rgba(74,222,128,0.03); display: flex; align-items: center; justify-content: center; font-size: 22px; color: rgba(74,222,128,0.12); opacity: 0; }
+    .flying-card.from-left { animation: throwFromLeft var(--dur, 12s) var(--delay, 0s) linear infinite; }
+    @keyframes throwFromLeft {
+      0% { opacity: 0; transform: translateX(-120px) translateY(var(--startY, 50vh)) rotate(-30deg) scale(0.7); }
+      5% { opacity: 0.6; }
+      50% { opacity: 0.4; transform: translateX(50vw) translateY(var(--midY, 45vh)) rotate(15deg) scale(1); }
+      95% { opacity: 0; }
+      100% { opacity: 0; transform: translateX(110vw) translateY(var(--endY, 55vh)) rotate(45deg) scale(0.8); }
+    }
+    .flying-card.from-right { animation: throwFromRight var(--dur, 14s) var(--delay, 0s) linear infinite; }
+    @keyframes throwFromRight {
+      0% { opacity: 0; transform: translateX(110vw) translateY(var(--startY, 40vh)) rotate(30deg) scale(0.7); }
+      5% { opacity: 0.6; }
+      50% { opacity: 0.4; transform: translateX(50vw) translateY(var(--midY, 50vh)) rotate(-10deg) scale(1); }
+      95% { opacity: 0; }
+      100% { opacity: 0; transform: translateX(-120px) translateY(var(--endY, 45vh)) rotate(-40deg) scale(0.8); }
+    }
+    @media (max-width: 600px) {
+      .nav { padding: 16px 20px; }
+      .hero { padding: 100px 16px 40px; }
+      .features { padding: 40px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- SVG Decorations -->
+  <div class="svg-decorations">
+    <svg class="svg-deco" style="top:5%;left:3%;width:80px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 3c1 0 2 .5 2.5 1.5S15 9 15 10H9c0-1 .5-2.5 1-3.5S11 3.5 12 5z" fill="currentColor" opacity="0.3"/></svg>
+    <svg class="svg-deco" style="top:8%;right:6%;width:90px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="12,2 15,9 22,9 16,14 18,21 12,17 6,21 8,14 2,9 9,9" opacity="0.4"/></svg>
+    <svg class="svg-deco" style="top:30%;left:2%;width:70px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6" stroke-dasharray="2 2"/><circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.3"/></svg>
+    <svg class="svg-deco" style="top:25%;right:3%;width:60px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 7l10 10M17 7L7 17" opacity="0.4"/></svg>
+    <svg class="svg-deco" style="top:55%;left:4%;width:50px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" opacity="0.4"/></svg>
+    <svg class="svg-deco" style="top:70%;right:5%;width:75px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20" fill="currentColor" opacity="0.15"/></svg>
+  </div>
+
+  <nav class="nav">
+    <div class="logo">LOKID</div>
+    <div class="nav-tag">// AR COACHING GLASSES</div>
+  </nav>
+
+  <section class="hero">
+    <div class="animated-grid"></div>
+    <div class="scanline"></div>
+    <div class="particles" id="particles"></div>
+    <div class="hud-status">Coming Soon</div>
+    <h1 class="hero-title">The smartest player at<span class="line2">any table</span></h1>
+    <p class="hero-sub">AR glasses that coach you during poker: real-time move suggestions, blunder alerts, and automatic post-game reviews.</p>
+    <div class="hero-form">
+      <script async data-uid="faa6e4ec7b" src="https://lokid-2.kit.com/faa6e4ec7b/index.js"></script>
+    </div>
+    <p class="form-note">Join waitlist for <strong>40% early-bird pricing</strong> at Kickstarter launch</p>
+  </section>
+
+  <section class="product-showcase fade-in">
+    <p class="product-label">// Product Preview</p>
+    <div class="product-frame">
+      <img class="product-image" src="https://mcp-tools-flux-1-kontext-dev.hf.space/--replicas/xj97x/gradio_api/file=/tmp/gradio/7962ac54bed5d4aa1a59473702dcf145dce712c684fb1eb637a70ec1d8a12183/image.webp" alt="Lokid AR Glasses - Lifestyle shot at poker table" loading="lazy">
+      <div class="product-corner-tl"></div>
+      <div class="product-corner-br"></div>
+      <span class="hud-overlay top-left">REC &#9679;</span>
+      <span class="hud-overlay top-right">LOKID v1.0</span>
+      <span class="hud-overlay bottom-left">16:9 • AR DISPLAY</span>
+      <span class="hud-overlay bottom-right">2026.Q3</span>
+    </div>
+  </section>
+
+  <section class="features">
+    <p class="section-label fade-in">// Capabilities</p>
+    <h2 class="section-title fade-in">Built for the game</h2>
+    <div class="feature-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+        </div>
+        <h3>Chess Coaching</h3>
+        <p>Best move highlighted in real-time. Blunder warnings before you commit. Automatic post-game review with every session.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="10" height="15" rx="1.5" transform="rotate(-10 6 10.5)"/>
+            <rect x="13" y="3" width="10" height="15" rx="1.5" transform="rotate(10 18 10.5)"/>
+            <text x="5" y="9" font-size="4" fill="#4ADE80" font-family="sans-serif" transform="rotate(-10 6 10.5)">A</text>
+            <text x="17" y="9" font-size="4" fill="#4ADE80" font-family="sans-serif" transform="rotate(10 18 10.5)">K</text>
+          </svg>
+        </div>
+        <h3>Poker Analytics</h3>
+        <p>Live win probability, pot odds, and opponent tendency tags displayed right on the lens. Better decisions every hand.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Invisible Design</h3>
+        <p>Looks like regular glasses. Lightweight, all-day comfortable, with a discreet micro-display only you can see.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Lokid &ensp;|&ensp; AR Coaching Systems
+  </footer>
+
+  <div class="flying-cards" id="flyingCards"></div>
+
+  <script>
+    // Fade-in observer
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+
+    // Particles
+    var pc = document.getElementById('particles');
+    if (pc) {
+      for (var i = 0; i < 30; i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        var s = Math.random() * 3 + 1;
+        p.style.cssText = 'width:' + s + 'px;height:' + s + 'px;left:' + (Math.random()*100) + '%;top:' + (Math.random()*100) + '%;animation-delay:' + (Math.random()*8) + 's;animation-duration:' + (Math.random()*10+8) + 's';
+        pc.appendChild(p);
+      }
+    }
+
+    // Kit form style override
+    function styleKitForms() {
+      document.querySelectorAll('.formkit-fields').forEach(function(fields) {
+        fields.style.cssText = 'display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;gap:0 !important';
+      });
+      document.querySelectorAll('.formkit-field').forEach(function(field) {
+        field.style.cssText = 'flex:1 1 auto !important;min-width:0 !important';
+      });
+      document.querySelectorAll('.formkit-input').forEach(function(input) {
+        input.style.cssText = 'width:100% !important;height:50px !important;padding:14px 16px !important;font-size:15px !important;font-family:Inter,sans-serif !important;background:rgba(255,255,255,0.05) !important;border:1px solid rgba(74,222,128,0.3) !important;border-right:none !important;border-radius:6px 0 0 6px !important;color:#f0f0f0 !important;outline:none !important';
+      });
+      document.querySelectorAll('.formkit-submit').forEach(function(btn) {
+        btn.style.cssText = 'flex:0 0 auto !important;height:50px !important;padding:0 28px !important;font-size:13px !important;font-family:JetBrains Mono,monospace !important;font-weight:500 !important;text-transform:uppercase !important;letter-spacing:2px !important;background:#4ADE80 !important;color:#000 !important;border:1px solid #4ADE80 !important;border-radius:0 6px 6px 0 !important;cursor:pointer !important;white-space:nowrap !important;display:flex !important;align-items:center !important;justify-content:center !important';
+      });
+      document.querySelectorAll('.formkit-guarantee, .formkit-powered-by-convertkit-container').forEach(function(el) {
+        el.style.display = 'none';
+      });
+    }
+    var kitObs = new MutationObserver(function() {
+      if (document.querySelector('.formkit-fields')) styleKitForms();
+    });
+    kitObs.observe(document.body, { childList: true, subtree: true });
+    setTimeout(styleKitForms, 1500);
+    setTimeout(styleKitForms, 3000);
+
+    // Flying poker cards
+    var fcContainer = document.getElementById('flyingCards');
+    if (fcContainer) {
+      var suits = ['\u2660','\u2665','\u2666','\u2663'];
+      var ranks = ['A','K','Q','J','10'];
+      for (var i = 0; i < 12; i++) {
+        var card = document.createElement('div');
+        card.className = 'flying-card ' + (i % 2 === 0 ? 'from-left' : 'from-right');
+        card.textContent = ranks[Math.floor(Math.random()*ranks.length)] + suits[Math.floor(Math.random()*suits.length)];
+        var startY = Math.random() * 80 + 10;
+        var midY = startY + (Math.random() * 30 - 15);
+        var endY = startY + (Math.random() * 40 - 20);
+        var dur = Math.random() * 12 + 10;
+        var delay = Math.random() * 15;
+        card.style.setProperty('--startY', startY + 'vh');
+        card.style.setProperty('--midY', midY + 'vh');
+        card.style.setProperty('--endY', endY + 'vh');
+        card.style.setProperty('--dur', dur + 's');
+        card.style.setProperty('--delay', delay + 's');
+        fcContainer.appendChild(card);
+      }
+    }
+
+    // Mobile Kit form adjustment
+    if (window.innerWidth <= 600) {
+      setTimeout(function() {
+        document.querySelectorAll('.formkit-fields').forEach(function(f) {
+          f.style.cssText = 'display:flex !important;flex-direction:column !important;gap:8px !important';
+        });
+        document.querySelectorAll('.formkit-input').forEach(function(inp) {
+          inp.style.borderRight = '1px solid rgba(74,222,128,0.3)';
+          inp.style.borderRadius = '6px';
+        });
+        document.querySelectorAll('.formkit-submit').forEach(function(b) {
+          b.style.borderRadius = '6px';
+          b.style.width = '100%';
+        });
+      }, 2000);
+    }  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lokid AR Glasses — The Smartest Player at Any Table</title>
+  <meta name="description" content="AR glasses that coach you during poker. Real-time move suggestions, blunder alerts, and automatic post-game reviews. Join the waitlist for 40% early-bird pricing.">
+  <meta property="og:title" content="Lokid AR Glasses — The Smartest Player at Any Table">
+  <meta property="og:description" content="AR glasses that coach you during poker. Real-time move suggestions, blunder alerts, and post-game reviews.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --green: #4ADE80;
+      --green-dim: rgba(74, 222, 128, 0.12);
       --green-glow: rgba(74, 222, 128, 0.4);
       --black: #000000;
       --dark: #050505;
@@ -307,188 +568,3 @@
 
   <div class="grid-bg"></div>
   <div class="scanline"></div>
-  <div class="particles" id="particles"></div>
-
-  <!-- Flying poker cards animation -->
-  <div class="flying-cards" id="flyingCards"></div>
-
-  <div class="poker-deco suit-1"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 10c-8 0-18 12-18 26 0 10 6 18 14 20-6 2-14 4-20 10-4 4-4 10 0 14s10 4 14 0c6-6 8-14 10-20 2 6 4 14 10 20 4 4 10 4 14 0s4-10 0-14c-6-6-14-8-20-10 8-2 14-10 14-20C68 22 58 10 50 10z"/></svg></div>
-  <div class="poker-deco suit-2"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 5L62 38H97L69 58l11 34L50 72 20 92l11-34L3 38h35z"/></svg></div>
-  <div class="poker-deco suit-3"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 90L10 50 50 10l40 40z"/></svg></div>
-  <div class="poker-deco suit-4"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 15C35 15 15 30 15 50c0 25 35 45 35 45s35-20 35-45C85 30 65 15 50 15z"/></svg></div>
-  <div class="poker-deco chip-1"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="34"/><line x1="50" y1="6" x2="50" y2="16"/><line x1="50" y1="84" x2="50" y2="94"/><line x1="6" y1="50" x2="16" y2="50"/><line x1="84" y1="50" x2="94" y2="50"/><line x1="19" y1="19" x2="26" y2="26"/><line x1="74" y1="74" x2="81" y2="81"/><line x1="81" y1="19" x2="74" y2="26"/><line x1="26" y1="74" x2="19" y2="81"/></svg></div>
-  <div class="poker-deco chip-2"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="34"/><line x1="50" y1="6" x2="50" y2="16"/><line x1="50" y1="84" x2="50" y2="94"/><line x1="6" y1="50" x2="16" y2="50"/><line x1="84" y1="50" x2="94" y2="50"/></svg></div>
-
-  <nav>
-    <a href="#" class="nav-brand">Lokid</a>
-    <span class="nav-tag">// AR Coaching Glasses</span>
-  </nav>
-
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hud-status">Coming Soon</div>
-      <h1>The smartest player at<span class="line2 green">any table</span></h1>
-      <p class="hero-sub">AR glasses that coach you during poker: real-time move suggestions, blunder alerts, and automatic post-game reviews.</p>
-
-      <div class="form-section">
-        <script async data-uid="faa6e4ec7b" src="https://lokid-2.kit.com/faa6e4ec7b/index.js"></script>
-        <p class="form-note">Join waitlist for <strong>40% early-bird pricing</strong> at Kickstarter launch</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="product-showcase fade-in">
-    <p class="product-label">// Product Preview</p>
-    <div class="product-frame">
-      <div class="product-placeholder">
-        <svg viewBox="0 0 120 50" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="5" y="10" width="45" height="30" rx="8" />
-          <rect x="70" y="10" width="45" height="30" rx="8" />
-          <path d="M50 25 C55 20 65 20 70 25" />
-          <line x1="5" y1="25" x2="0" y2="20" />
-          <line x1="115" y1="25" x2="120" y2="20" />
-          <rect x="12" y="16" width="16" height="3" rx="1" fill="currentColor" opacity="0.3" />
-          <rect x="12" y="21" width="10" height="2" rx="1" fill="currentColor" opacity="0.2" />
-          <circle cx="35" cy="28" r="4" stroke-dasharray="2 1" opacity="0.3" />
-        </svg>
-        <span>[ Add product image: hero.jpg ]</span>
-      </div>
-      <div class="product-corner-tl"></div>
-      <div class="product-corner-br"></div>
-      <span class="hud-overlay top-left">REC &#9679;</span>
-      <span class="hud-overlay top-right">LOKID v1.0</span>
-      <span class="hud-overlay bottom-left">16:9 • AR DISPLAY</span>
-      <span class="hud-overlay bottom-right">2026.Q3</span>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="features">
-    <div class="features-header">
-      <p class="section-label fade-in">// Capabilities</p>
-      <h2 class="section-title fade-in">Built for the game</h2>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card fade-in">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M9 3v18M3 9h18M9 12l2 2 4-4"/></svg>
-        </div>
-        <h3>Chess Coaching</h3>
-        <p>Best move highlighted in real-time. Blunder warnings before you commit. Automatic post-game review with every session.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="1" y="3" width="10" height="15" rx="1.5" transform="rotate(-10 6 10.5)"/>
-            <rect x="13" y="3" width="10" height="15" rx="1.5" transform="rotate(10 18 10.5)"/>
-            <text x="5" y="9" font-size="4" fill="#4ADE80" font-family="sans-serif" transform="rotate(-10 6 10.5)">A</text>
-            <text x="17" y="9" font-size="4" fill="#4ADE80" font-family="sans-serif" transform="rotate(10 18 10.5)">K</text>
-          </svg>
-        </div>
-        <h3>Poker Analytics</h3>
-        <p>Live win probability, pot odds, and opponent tendency tags displayed right on the lens. Better decisions every hand.</p>
-      </div>
-      <div class="feature-card fade-in">
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <h3>Invisible Design</h3>
-        <p>Looks like regular glasses. Lightweight, all-day comfortable, with a discreet micro-display only you can see.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    &copy; 2026 Lokid &ensp;|&ensp; AR Coaching Systems
-  </footer>
-
-  <div class="flying-cards" id="flyingCards"></div>
-
-  <script>
-    // Fade-in observer
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
-
-    // Particles
-    var pc = document.getElementById('particles');
-    if (pc) {
-      for (var i = 0; i < 30; i++) {
-        var p = document.createElement('div');
-        p.className = 'particle';
-        var s = Math.random() * 3 + 1;
-        p.style.cssText = 'width:' + s + 'px;height:' + s + 'px;left:' + (Math.random()*100) + '%;top:' + (Math.random()*100) + '%;animation-delay:' + (Math.random()*8) + 's;animation-duration:' + (Math.random()*10+8) + 's';
-        pc.appendChild(p);
-      }
-    }
-
-    // Kit form style override
-    function styleKitForms() {
-      document.querySelectorAll('.formkit-fields').forEach(function(fields) {
-        fields.style.cssText = 'display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;gap:0 !important';
-      });
-      document.querySelectorAll('.formkit-field').forEach(function(field) {
-        field.style.cssText = 'flex:1 1 auto !important;min-width:0 !important';
-      });
-      document.querySelectorAll('.formkit-input').forEach(function(input) {
-        input.style.cssText = 'width:100% !important;height:50px !important;padding:14px 16px !important;font-size:15px !important;font-family:Inter,sans-serif !important;background:rgba(255,255,255,0.05) !important;border:1px solid rgba(74,222,128,0.3) !important;border-right:none !important;border-radius:6px 0 0 6px !important;color:#f0f0f0 !important;outline:none !important';
-      });
-      document.querySelectorAll('.formkit-submit').forEach(function(btn) {
-        btn.style.cssText = 'flex:0 0 auto !important;height:50px !important;padding:0 28px !important;font-size:13px !important;font-family:JetBrains Mono,monospace !important;font-weight:500 !important;text-transform:uppercase !important;letter-spacing:2px !important;background:#4ADE80 !important;color:#000 !important;border:1px solid #4ADE80 !important;border-radius:0 6px 6px 0 !important;cursor:pointer !important;white-space:nowrap !important;display:flex !important;align-items:center !important;justify-content:center !important';
-      });
-      document.querySelectorAll('.formkit-guarantee, .formkit-powered-by-convertkit-container').forEach(function(el) {
-        el.style.display = 'none';
-      });
-    }
-    var kitObs = new MutationObserver(function() {
-      if (document.querySelector('.formkit-fields')) styleKitForms();
-    });
-    kitObs.observe(document.body, { childList: true, subtree: true });
-    setTimeout(styleKitForms, 1500);
-    setTimeout(styleKitForms, 3000);
-    // Flying poker cards
-    var fcContainer = document.getElementById('flyingCards');
-    if (fcContainer) {
-      var suits = ['\u2660','\u2665','\u2666','\u2663'];
-      var ranks = ['A','K','Q','J','10'];
-      for (var i = 0; i < 12; i++) {
-        var card = document.createElement('div');
-        card.className = 'flying-card ' + (i % 2 === 0 ? 'from-left' : 'from-right');
-        card.textContent = ranks[Math.floor(Math.random()*ranks.length)] + suits[Math.floor(Math.random()*suits.length)];
-        var startY = Math.random() * 80 + 10;
-        var midY = startY + (Math.random() * 30 - 15);
-        var endY = startY + (Math.random() * 40 - 20);
-        var dur = Math.random() * 12 + 10;
-        var delay = Math.random() * 15;
-        card.style.setProperty('--startY', startY + 'vh');
-        card.style.setProperty('--midY', midY + 'vh');
-        card.style.setProperty('--endY', endY + 'vh');
-        card.style.setProperty('--dur', dur + 's');
-        card.style.setProperty('--delay', delay + 's');
-        fcContainer.appendChild(card);
-      }
-    }
-
-    // Mobile Kit form adjustment
-    if (window.innerWidth <= 600) {
-      setTimeout(function() {
-        document.querySelectorAll('.formkit-fields').forEach(function(f) {
-          f.style.cssText = 'display:flex !important;flex-direction:column !important;gap:8px !important';
-        });
-        document.querySelectorAll('.formkit-input').forEach(function(inp) {
-          inp.style.borderRight = '1px solid rgba(74,222,128,0.3)';
-          inp.style.borderRadius = '6px';
-        });
-        document.querySelectorAll('.formkit-submit').forEach(function(b) {
-          b.style.borderRadius = '6px';
-          b.style.width = '100%';
-        });
-      }, 2000);
-    }
-  </script>
-</body>
-</html>
