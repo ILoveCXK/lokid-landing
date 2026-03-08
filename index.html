@@ -4,16 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lokid AR Glasses — The Smartest Player at Any Table</title>
-  <meta name="description" content="AR glasses that coach you during chess and poker. Real-time move suggestions, blunder alerts, and automatic post-game reviews. Join the waitlist for 40% early-bird pricing.">
+  <meta name="description" content="AR glasses that coach you during poker. Real-time move suggestions, blunder alerts, and automatic post-game reviews. Join the waitlist for 40% early-bird pricing.">
   <meta property="og:title" content="Lokid AR Glasses — The Smartest Player at Any Table">
-  <meta property="og:description" content="AR glasses that coach you during chess and poker. Real-time move suggestions, blunder alerts, and post-game reviews.">
+  <meta property="og:description" content="AR glasses that coach you during poker. Real-time move suggestions, blunder alerts, and post-game reviews.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
       --green: #4ADE80;
       --green-dim: rgba(74, 222, 128, 0.12);
@@ -23,9 +22,7 @@
       --gray: #8a8a8a;
       --white: #f0f0f0;
     }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Inter', sans-serif;
       background: var(--black);
@@ -35,18 +32,15 @@
     }
 
     .grid-bg {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background-image:
         linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px);
       background-size: 80px 80px;
       pointer-events: none; z-index: 0;
     }
-
     .scanline {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 2px;
+      position: fixed; top: 0; left: 0; width: 100%; height: 2px;
       background: linear-gradient(90deg, transparent 0%, var(--green) 50%, transparent 100%);
       opacity: 0.12; z-index: 999; pointer-events: none;
       animation: scanDown 8s linear infinite;
@@ -63,6 +57,50 @@
       0% { opacity: 0; transform: translateY(100vh) scale(0); }
       10% { opacity: 0.5; } 90% { opacity: 0.5; }
       100% { opacity: 0; transform: translateY(-20vh) scale(1); }
+    }
+
+    /* === FLYING POKER CARDS === */
+    .flying-cards { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+    .flying-card {
+      position: absolute; width: 60px; height: 84px;
+      border-radius: 6px; border: 1px solid rgba(74,222,128,0.12);
+      background: rgba(74,222,128,0.03);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; color: rgba(74,222,128,0.12);
+      opacity: 0;
+    }
+    .flying-card .card-corner {
+      position: absolute; top: 5px; left: 6px;
+      font-size: 10px; line-height: 1; color: rgba(74,222,128,0.15);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .flying-card .card-corner-br {
+      position: absolute; bottom: 5px; right: 6px;
+      font-size: 10px; line-height: 1; color: rgba(74,222,128,0.15);
+      font-family: 'JetBrains Mono', monospace;
+      transform: rotate(180deg);
+    }
+    /* Cards from left */
+    .flying-card.from-left {
+      animation: throwFromLeft var(--dur, 12s) var(--delay, 0s) linear infinite;
+    }
+    @keyframes throwFromLeft {
+      0% { opacity: 0; transform: translateX(-120px) translateY(var(--startY, 50vh)) rotate(-30deg) scale(0.7); }
+      5% { opacity: 0.6; }
+      50% { opacity: 0.4; transform: translateX(50vw) translateY(var(--midY, 45vh)) rotate(15deg) scale(1); }
+      95% { opacity: 0; }
+      100% { opacity: 0; transform: translateX(110vw) translateY(var(--endY, 55vh)) rotate(45deg) scale(0.8); }
+    }
+    /* Cards from right */
+    .flying-card.from-right {
+      animation: throwFromRight var(--dur, 14s) var(--delay, 0s) linear infinite;
+    }
+    @keyframes throwFromRight {
+      0% { opacity: 0; transform: translateX(110vw) translateY(var(--startY, 40vh)) rotate(30deg) scale(0.7); }
+      5% { opacity: 0.6; }
+      50% { opacity: 0.4; transform: translateX(50vw) translateY(var(--midY, 50vh)) rotate(-10deg) scale(1); }
+      95% { opacity: 0; }
+      100% { opacity: 0; transform: translateX(-120px) translateY(var(--endY, 45vh)) rotate(-40deg) scale(0.8); }
     }
 
     .poker-deco {
@@ -97,12 +135,10 @@
       color: rgba(74,222,128,0.5); letter-spacing: 2px; text-transform: uppercase;
     }
 
-    /* === HERO === */
     .hero {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 90px 24px 50px;
-      min-height: 100vh;
+      padding: 90px 24px 50px; min-height: 100vh;
     }
     .hero::before {
       content: ''; position: absolute; top: 20%; left: 50%;
@@ -116,13 +152,10 @@
       max-width: 800px; text-align: center;
     }
     .hud-status {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px;
-      letter-spacing: 3px; color: var(--green); text-transform: uppercase;
-      margin-bottom: 16px; opacity: 0.7;
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      letter-spacing: 4px; color: var(--green); text-transform: uppercase;
+      margin-bottom: 16px; opacity: 0.8;
     }
-    .hud-status .blink { animation: blink 1.5s step-end infinite; }
-    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-
     .hero h1 {
       font-family: 'Poppins', sans-serif; font-weight: 900;
       font-size: clamp(36px, 6vw, 68px);
@@ -132,10 +165,7 @@
     .hero h1 .green {
       color: var(--green); text-shadow: 0 0 40px rgba(74,222,128,0.3);
     }
-    .hero h1 .line2 {
-      display: block;
-    }
-
+    .hero h1 .line2 { display: block; }
     .hero-sub {
       font-size: clamp(14px, 1.6vw, 17px); line-height: 1.7;
       color: var(--gray); max-width: 500px; margin: 0 auto 24px;
@@ -160,8 +190,7 @@
     .product-showcase {
       position: relative; z-index: 1;
       padding: 60px 24px 50px;
-      max-width: 900px; margin: 0 auto;
-      text-align: center;
+      max-width: 900px; margin: 0 auto; text-align: center;
     }
     .product-label {
       font-family: 'JetBrains Mono', monospace; font-size: 11px;
@@ -169,61 +198,31 @@
       color: var(--green); opacity: 0.5; margin-bottom: 24px;
     }
     .product-frame {
-      position: relative;
-      width: 100%; max-width: 700px; margin: 0 auto;
+      position: relative; width: 100%; max-width: 700px; margin: 0 auto;
       aspect-ratio: 16 / 9;
-      border: 1px solid rgba(74,222,128,0.15);
-      border-radius: 16px;
-      overflow: hidden;
-      background: rgba(74,222,128,0.02);
+      border: 1px solid rgba(74,222,128,0.15); border-radius: 16px;
+      overflow: hidden; background: rgba(74,222,128,0.02);
     }
-    .product-frame::before,
-    .product-frame::after {
-      content: ''; position: absolute;
-      width: 40px; height: 40px;
+    .product-frame::before, .product-frame::after {
+      content: ''; position: absolute; width: 40px; height: 40px;
       border-color: rgba(74,222,128,0.3); border-style: solid;
     }
-    .product-frame::before {
-      top: 12px; left: 12px;
-      border-width: 2px 0 0 2px; border-radius: 4px 0 0 0;
-    }
-    .product-frame::after {
-      bottom: 12px; right: 12px;
-      border-width: 0 2px 2px 0; border-radius: 0 0 4px 0;
-    }
-    .product-frame img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
+    .product-frame::before { top: 12px; left: 12px; border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
+    .product-frame::after { bottom: 12px; right: 12px; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; }
+    .product-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .product-placeholder {
       position: absolute; inset: 0;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 16px;
     }
-    .product-placeholder svg {
-      width: 80px; height: 80px;
-      color: rgba(74,222,128,0.15);
-    }
+    .product-placeholder svg { width: 80px; height: 80px; color: rgba(74,222,128,0.15); }
     .product-placeholder span {
       font-family: 'JetBrains Mono', monospace; font-size: 12px;
       color: rgba(74,222,128,0.25); letter-spacing: 2px; text-transform: uppercase;
     }
-    .product-corner-tl, .product-corner-br {
-      position: absolute; width: 40px; height: 40px;
-    }
-    .product-corner-tl {
-      top: 12px; right: 12px;
-      border-top: 2px solid rgba(74,222,128,0.3);
-      border-right: 2px solid rgba(74,222,128,0.3);
-      border-radius: 0 4px 0 0;
-    }
-    .product-corner-br {
-      bottom: 12px; left: 12px;
-      border-bottom: 2px solid rgba(74,222,128,0.3);
-      border-left: 2px solid rgba(74,222,128,0.3);
-      border-radius: 0 0 0 4px;
-    }
-    /* HUD data overlays on product frame */
+    .product-corner-tl, .product-corner-br { position: absolute; width: 40px; height: 40px; }
+    .product-corner-tl { top: 12px; right: 12px; border-top: 2px solid rgba(74,222,128,0.3); border-right: 2px solid rgba(74,222,128,0.3); border-radius: 0 4px 0 0; }
+    .product-corner-br { bottom: 12px; left: 12px; border-bottom: 2px solid rgba(74,222,128,0.3); border-left: 2px solid rgba(74,222,128,0.3); border-radius: 0 0 0 4px; }
     .hud-overlay {
       position: absolute; font-family: 'JetBrains Mono', monospace;
       font-size: 10px; color: rgba(74,222,128,0.3); letter-spacing: 1px;
@@ -248,9 +247,7 @@
       font-family: 'Poppins', sans-serif; font-weight: 800;
       font-size: clamp(24px, 3.5vw, 34px); color: var(--white);
     }
-
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-
     .feature-card {
       background: rgba(74,222,128,0.08);
       border: 1px solid rgba(74,222,128,0.2);
@@ -270,8 +267,8 @@
       box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 30px rgba(74,222,128,0.1);
     }
     .feature-icon {
-      width: 48px; height: 48px;
-      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
       margin-bottom: 16px;
       background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3);
     }
@@ -296,7 +293,7 @@
       .hero { padding: 80px 20px 30px; }
       .features-grid { grid-template-columns: 1fr; gap: 12px; }
       .feature-card { padding: 24px 18px; }
-      .poker-deco { display: none; }
+      .poker-deco, .flying-cards { display: none; }
       .product-frame { aspect-ratio: 4 / 3; }
     }
 
@@ -312,6 +309,9 @@
   <div class="scanline"></div>
   <div class="particles" id="particles"></div>
 
+  <!-- Flying poker cards animation -->
+  <div class="flying-cards" id="flyingCards"></div>
+
   <div class="poker-deco suit-1"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 10c-8 0-18 12-18 26 0 10 6 18 14 20-6 2-14 4-20 10-4 4-4 10 0 14s10 4 14 0c6-6 8-14 10-20 2 6 4 14 10 20 4 4 10 4 14 0s4-10 0-14c-6-6-14-8-20-10 8-2 14-10 14-20C68 22 58 10 50 10z"/></svg></div>
   <div class="poker-deco suit-2"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 5L62 38H97L69 58l11 34L50 72 20 92l11-34L3 38h35z"/></svg></div>
   <div class="poker-deco suit-3"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 90L10 50 50 10l40 40z"/></svg></div>
@@ -324,14 +324,11 @@
     <span class="nav-tag">// AR Coaching Glasses</span>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hud-status">
-        <span class="blink">&#9679;</span>&ensp;System Online — Pre-Launch Active
-      </div>
+      <div class="hud-status">Coming Soon</div>
       <h1>The smartest player at<span class="line2 green">any table</span></h1>
-      <p class="hero-sub">AR glasses that coach you during chess and poker — real-time move suggestions, blunder alerts, and automatic post-game reviews.</p>
+      <p class="hero-sub">AR glasses that coach you during poker: real-time move suggestions, blunder alerts, and automatic post-game reviews.</p>
 
       <div class="form-section">
         <script async data-uid="faa6e4ec7b" src="https://lokid-2.kit.com/faa6e4ec7b/index.js"></script>
@@ -340,20 +337,16 @@
     </div>
   </section>
 
-  <!-- PRODUCT SHOWCASE -->
   <section class="product-showcase fade-in">
     <p class="product-label">// Product Preview</p>
     <div class="product-frame">
-      <!-- Replace this placeholder with: <img src="hero.jpg" alt="Lokid AR Glasses"> -->
       <div class="product-placeholder">
         <svg viewBox="0 0 120 50" fill="none" stroke="currentColor" stroke-width="1.5">
-          <!-- Glasses outline SVG -->
           <rect x="5" y="10" width="45" height="30" rx="8" />
           <rect x="70" y="10" width="45" height="30" rx="8" />
           <path d="M50 25 C55 20 65 20 70 25" />
           <line x1="5" y1="25" x2="0" y2="20" />
           <line x1="115" y1="25" x2="120" y2="20" />
-          <!-- HUD elements on left lens -->
           <rect x="12" y="16" width="16" height="3" rx="1" fill="currentColor" opacity="0.3" />
           <rect x="12" y="21" width="10" height="2" rx="1" fill="currentColor" opacity="0.2" />
           <circle cx="35" cy="28" r="4" stroke-dasharray="2 1" opacity="0.3" />
@@ -362,7 +355,6 @@
       </div>
       <div class="product-corner-tl"></div>
       <div class="product-corner-br"></div>
-      <!-- HUD data overlays -->
       <span class="hud-overlay top-left">REC &#9679;</span>
       <span class="hud-overlay top-right">LOKID v1.0</span>
       <span class="hud-overlay bottom-left">16:9 • AR DISPLAY</span>
@@ -372,7 +364,6 @@
 
   <div class="divider"></div>
 
-  <!-- FEATURES -->
   <section class="features">
     <div class="features-header">
       <p class="section-label fade-in">// Capabilities</p>
@@ -388,7 +379,12 @@
       </div>
       <div class="feature-card fade-in">
         <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="14" height="20" rx="2" transform="rotate(-15 9 14)"/><rect x="8" y="2" width="14" height="20" rx="2" transform="rotate(15 15 12)"/><circle cx="12" cy="12" r="2" fill="#4ADE80"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="10" height="15" rx="1.5" transform="rotate(-10 6 10.5)"/>
+            <rect x="13" y="3" width="10" height="15" rx="1.5" transform="rotate(10 18 10.5)"/>
+            <text x="5" y="9" font-size="4" fill="#4ADE80" font-family="sans-serif" transform="rotate(-10 6 10.5)">A</text>
+            <text x="17" y="9" font-size="4" fill="#4ADE80" font-family="sans-serif" transform="rotate(10 18 10.5)">K</text>
+          </svg>
         </div>
         <h3>Poker Analytics</h3>
         <p>Live win probability, pot odds, and opponent tendency tags displayed right on the lens. Better decisions every hand.</p>
@@ -407,25 +403,27 @@
     &copy; 2026 Lokid &ensp;|&ensp; AR Coaching Systems
   </footer>
 
+  <div class="flying-cards" id="flyingCards"></div>
+
   <script>
     // Fade-in observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
       });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
 
     // Particles
-    const container = document.getElementById('particles');
-    for (let i = 0; i < 25; i++) {
-      const p = document.createElement('div');
-      p.className = 'particle';
-      p.style.left = Math.random() * 100 + '%';
-      p.style.animationDuration = (8 + Math.random() * 12) + 's';
-      p.style.animationDelay = (Math.random() * 10) + 's';
-      p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
-      container.appendChild(p);
+    var pc = document.getElementById('particles');
+    if (pc) {
+      for (var i = 0; i < 30; i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        var s = Math.random() * 3 + 1;
+        p.style.cssText = 'width:' + s + 'px;height:' + s + 'px;left:' + (Math.random()*100) + '%;top:' + (Math.random()*100) + '%;animation-delay:' + (Math.random()*8) + 's;animation-duration:' + (Math.random()*10+8) + 's';
+        pc.appendChild(p);
+      }
     }
 
     // Kit form style override
@@ -446,34 +444,51 @@
         el.style.display = 'none';
       });
     }
-    var kitObserver = new MutationObserver(function() {
+    var kitObs = new MutationObserver(function() {
       if (document.querySelector('.formkit-fields')) styleKitForms();
     });
-    kitObserver.observe(document.body, { childList: true, subtree: true });
+    kitObs.observe(document.body, { childList: true, subtree: true });
     setTimeout(styleKitForms, 1500);
     setTimeout(styleKitForms, 3000);
+    // Flying poker cards
+    var fcContainer = document.getElementById('flyingCards');
+    if (fcContainer) {
+      var suits = ['\u2660','\u2665','\u2666','\u2663'];
+      var ranks = ['A','K','Q','J','10'];
+      for (var i = 0; i < 12; i++) {
+        var card = document.createElement('div');
+        card.className = 'flying-card ' + (i % 2 === 0 ? 'from-left' : 'from-right');
+        card.textContent = ranks[Math.floor(Math.random()*ranks.length)] + suits[Math.floor(Math.random()*suits.length)];
+        var startY = Math.random() * 80 + 10;
+        var midY = startY + (Math.random() * 30 - 15);
+        var endY = startY + (Math.random() * 40 - 20);
+        var dur = Math.random() * 12 + 10;
+        var delay = Math.random() * 15;
+        card.style.setProperty('--startY', startY + 'vh');
+        card.style.setProperty('--midY', midY + 'vh');
+        card.style.setProperty('--endY', endY + 'vh');
+        card.style.setProperty('--dur', dur + 's');
+        card.style.setProperty('--delay', delay + 's');
+        fcContainer.appendChild(card);
+      }
+    }
 
-    function checkMobile() {
-      if (window.innerWidth <= 768) {
+    // Mobile Kit form adjustment
+    if (window.innerWidth <= 600) {
+      setTimeout(function() {
         document.querySelectorAll('.formkit-fields').forEach(function(f) {
-          f.style.flexDirection = 'column';
-          f.style.flexWrap = 'wrap';
+          f.style.cssText = 'display:flex !important;flex-direction:column !important;gap:8px !important';
         });
-        document.querySelectorAll('.formkit-input').forEach(function(i) {
-          i.style.borderRight = '1px solid rgba(74,222,128,0.3)';
-          i.style.borderRadius = '6px';
+        document.querySelectorAll('.formkit-input').forEach(function(inp) {
+          inp.style.borderRight = '1px solid rgba(74,222,128,0.3)';
+          inp.style.borderRadius = '6px';
         });
         document.querySelectorAll('.formkit-submit').forEach(function(b) {
           b.style.borderRadius = '6px';
           b.style.width = '100%';
-          b.style.flex = '1 0 100%';
         });
-      }
+      }, 2000);
     }
-    window.addEventListener('resize', function() { styleKitForms(); checkMobile(); });
-    setTimeout(checkMobile, 1600);
-    setTimeout(checkMobile, 3100);
   </script>
-
 </body>
 </html>
