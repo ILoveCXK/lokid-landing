@@ -34,7 +34,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* === ANIMATED GRID === */
     .grid-bg {
       position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
@@ -66,7 +65,6 @@
       100% { opacity: 0; transform: translateY(-20vh) scale(1); }
     }
 
-    /* === FLOATING POKER ELEMENTS === */
     .poker-deco {
       position: fixed; pointer-events: none; z-index: 0;
       opacity: 0.05; color: var(--green);
@@ -83,7 +81,6 @@
       50% { transform: translateY(-20px) rotate(6deg); }
     }
 
-    /* === NAV === */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 16px 40px;
@@ -100,7 +97,6 @@
       color: rgba(74,222,128,0.5); letter-spacing: 2px; text-transform: uppercase;
     }
 
-    /* === HERO === */
     .hero {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -148,46 +144,10 @@
       color: var(--gray); max-width: 500px; margin: 0 auto 24px;
     }
 
-    /* === FORM (Kit overrides) === */
     .form-section {
       position: relative; z-index: 1;
       max-width: 520px; width: 100%; margin: 0 auto;
     }
-
-    .formkit-form { background: transparent !important; border: none !important; padding: 0 !important; min-width: 0 !important; }
-    .formkit-form [data-style="clean"] { padding: 0 !important; }
-    .formkit-fields {
-      display: flex !important; flex-direction: row !important;
-      flex-wrap: nowrap !important; gap: 0 !important;
-    }
-    .formkit-field { flex: 1 1 auto !important; min-width: 0 !important; }
-    .formkit-input {
-      padding: 14px 16px !important; font-size: 15px !important;
-      font-family: 'Inter', sans-serif !important;
-      background: rgba(255,255,255,0.05) !important;
-      border: 1px solid rgba(74,222,128,0.3) !important;
-      border-right: none !important;
-      border-radius: 6px 0 0 6px !important;
-      color: #f0f0f0 !important; height: 50px !important; width: 100% !important;
-    }
-    .formkit-input::placeholder { color: rgba(255,255,255,0.3) !important; }
-    .formkit-input:focus { border-color: var(--green) !important; background: rgba(74,222,128,0.05) !important; outline: none !important; box-shadow: 0 0 20px rgba(74,222,128,0.1) !important; }
-    .formkit-submit {
-      flex: 0 0 auto !important;
-      padding: 14px 28px !important; font-size: 13px !important;
-      font-family: 'JetBrains Mono', monospace !important; font-weight: 500 !important;
-      text-transform: uppercase !important; letter-spacing: 2px !important;
-      background: var(--green) !important; color: var(--black) !important;
-      border: 1px solid var(--green) !important;
-      border-radius: 0 6px 6px 0 !important;
-      cursor: pointer !important; white-space: nowrap !important;
-      transition: all 0.3s !important; height: 50px !important;
-      width: auto !important; min-width: 0 !important;
-    }
-    .formkit-submit span { padding: 0 !important; }
-    .formkit-submit:hover { background: #5eea94 !important; box-shadow: 0 0 40px rgba(74,222,128,0.3) !important; }
-    .formkit-guarantee, .formkit-powered-by-convertkit-container { display: none !important; }
-    .formkit-alert-success { display: block !important; color: var(--green) !important; font-family: 'Poppins', sans-serif !important; font-size: 18px !important; text-align: center !important; padding: 20px !important; }
 
     .form-note {
       text-align: center; font-size: 12px; color: rgba(255,255,255,0.25);
@@ -200,7 +160,6 @@
       background: linear-gradient(90deg, transparent 0%, rgba(74,222,128,0.15) 50%, transparent 100%);
     }
 
-    /* === FEATURES === */
     .features {
       position: relative; z-index: 1;
       padding: 60px 24px 60px; max-width: 1100px; margin: 0 auto;
@@ -251,7 +210,6 @@
     }
     .feature-card p { font-size: 13px; line-height: 1.65; color: var(--gray); }
 
-    /* === BOTTOM CTA === */
     .cta-section {
       position: relative; z-index: 1;
       padding: 60px 24px 80px; text-align: center;
@@ -271,16 +229,12 @@
       color: rgba(255,255,255,0.2); letter-spacing: 1px;
     }
 
-    /* === MOBILE === */
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
       .nav-tag { display: none; }
       .hero { padding: 80px 20px 30px; }
       .hero h1 .line2 { font-size: clamp(38px, 11vw, 60px); }
       .features-grid { grid-template-columns: 1fr; gap: 12px; }
-      .formkit-fields { flex-direction: column !important; flex-wrap: wrap !important; }
-      .formkit-input { border-right: 1px solid rgba(74,222,128,0.3) !important; border-radius: 6px !important; border-bottom: none !important; }
-      .formkit-submit { border-radius: 6px !important; width: 100% !important; flex: 1 0 100% !important; }
       .feature-card { padding: 24px 18px; }
       .poker-deco { display: none; }
     }
@@ -297,7 +251,6 @@
   <div class="scanline"></div>
   <div class="particles" id="particles"></div>
 
-  <!-- Floating poker decorations -->
   <div class="poker-deco suit-1"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 10c-8 0-18 12-18 26 0 10 6 18 14 20-6 2-14 4-20 10-4 4-4 10 0 14s10 4 14 0c6-6 8-14 10-20 2 6 4 14 10 20 4 4 10 4 14 0s4-10 0-14c-6-6-14-8-20-10 8-2 14-10 14-20C68 22 58 10 50 10z"/></svg></div>
   <div class="poker-deco suit-2"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 5L62 38H97L69 58l11 34L50 72 20 92l11-34L3 38h35z"/></svg></div>
   <div class="poker-deco suit-3"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 90L10 50 50 10l40 40z"/></svg></div>
@@ -372,6 +325,7 @@
   </footer>
 
   <script>
+    // Fade-in observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -379,6 +333,7 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+    // Particles
     const container = document.getElementById('particles');
     for (let i = 0; i < 25; i++) {
       const p = document.createElement('div');
@@ -389,6 +344,57 @@
       p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
       container.appendChild(p);
     }
+
+    // Kit form style override - runs after Kit loads
+    function styleKitForms() {
+      document.querySelectorAll('.formkit-fields').forEach(function(fields) {
+        fields.style.cssText = 'display:flex !important;flex-direction:row !important;flex-wrap:nowrap !important;gap:0 !important';
+      });
+      document.querySelectorAll('.formkit-field').forEach(function(field) {
+        field.style.cssText = 'flex:1 1 auto !important;min-width:0 !important';
+      });
+      document.querySelectorAll('.formkit-input').forEach(function(input) {
+        input.style.cssText = 'width:100% !important;height:50px !important;padding:14px 16px !important;font-size:15px !important;font-family:Inter,sans-serif !important;background:rgba(255,255,255,0.05) !important;border:1px solid rgba(74,222,128,0.3) !important;border-right:none !important;border-radius:6px 0 0 6px !important;color:#f0f0f0 !important;outline:none !important';
+      });
+      document.querySelectorAll('.formkit-submit').forEach(function(btn) {
+        btn.style.cssText = 'flex:0 0 auto !important;height:50px !important;padding:0 28px !important;font-size:13px !important;font-family:JetBrains Mono,monospace !important;font-weight:500 !important;text-transform:uppercase !important;letter-spacing:2px !important;background:#4ADE80 !important;color:#000 !important;border:1px solid #4ADE80 !important;border-radius:0 6px 6px 0 !important;cursor:pointer !important;white-space:nowrap !important;display:flex !important;align-items:center !important;justify-content:center !important';
+      });
+      document.querySelectorAll('.formkit-guarantee, .formkit-powered-by-convertkit-container').forEach(function(el) {
+        el.style.display = 'none';
+      });
+    }
+
+    // Watch for Kit forms to load, then restyle
+    var kitObserver = new MutationObserver(function(mutations) {
+      if (document.querySelector('.formkit-fields')) {
+        styleKitForms();
+      }
+    });
+    kitObserver.observe(document.body, { childList: true, subtree: true });
+    // Also run on a delay as backup
+    setTimeout(styleKitForms, 1500);
+    setTimeout(styleKitForms, 3000);
+    // Responsive: on mobile, stack the form
+    function checkMobile() {
+      if (window.innerWidth <= 768) {
+        document.querySelectorAll('.formkit-fields').forEach(function(f) {
+          f.style.flexDirection = 'column';
+          f.style.flexWrap = 'wrap';
+        });
+        document.querySelectorAll('.formkit-input').forEach(function(i) {
+          i.style.borderRight = '1px solid rgba(74,222,128,0.3)';
+          i.style.borderRadius = '6px';
+        });
+        document.querySelectorAll('.formkit-submit').forEach(function(b) {
+          b.style.borderRadius = '6px';
+          b.style.width = '100%';
+          b.style.flex = '1 0 100%';
+        });
+      }
+    }
+    window.addEventListener('resize', function() { styleKitForms(); checkMobile(); });
+    setTimeout(checkMobile, 1600);
+    setTimeout(checkMobile, 3100);
   </script>
 
 </body>
